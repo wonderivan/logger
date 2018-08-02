@@ -25,14 +25,14 @@ var p = `{
 
 func TestLogOut(t *testing.T) {
 	SetLogger(p)
-	Trace("#####this is Trace")
-	Debug("#####this is Debug")
-	Info("#####this is Info")
-	Warn("#####this is Warn")
-	Error("#####this is Error")
-	Crit("#####this is Critical")
-	Alert("#####this is Alert")
-	Emer("#####this is Emergency")
+	Trace("this is Trace")
+	Debug("this is Debug")
+	Info("this is Info")
+	Warn("this is Warn")
+	Error("this is Error")
+	Crit("this is Critical")
+	Alert("this is Alert")
+	Emer("this is Emergency")
 }
 
 func TestLogConfigReload(t *testing.T) {
