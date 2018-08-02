@@ -81,7 +81,6 @@ func (c *consoleLogger) Destroy() {
 func (c *consoleLogger) printlnConsole(when time.Time, msg string) {
 	c.Lock()
 	defer c.Unlock()
-	msg = " " + msg
 	os.Stdout.Write(append([]byte(msg), '\n'))
 }
 
