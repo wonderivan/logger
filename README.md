@@ -7,7 +7,7 @@ convenient log package
 
     // 配置logger，如果不配置时默认为控制台输出，等级为DEBG
     logger.SetLogger(`{"Console": {"level": "DEBG"}`)
-    // 配置详细见 下文
+    // 配置说明见下文
 
     // 设置完成后，即可在控制台和日志文件app.log中看到如下输出
     logger.Trace("this is Trace")
@@ -45,7 +45,7 @@ logger当前支持控制台、文件、网络3种方式适配器输出，可以�
 通过调用logger.SetLogger(config string)方法设置参数，config支持json配置，也支持指定内容为json配置的文件路径，例如：
 ```go
     // 通过配置参数直接配置
-    logger.SetLogger(`{"Console": {"level": "DEBG"}`)
+    logger.SetLogger(`{"Console": {"level": "DEBG"}}`)
     // 通过配置文件配置
     logger.SetLogger("/home/log.json")
 

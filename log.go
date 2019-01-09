@@ -99,6 +99,7 @@ type LocalLogger struct {
 	appName    string
 	callDepth  int
 	timeFormat string
+	usePath    string
 }
 
 func NewLogger(depth ...int) *LocalLogger {
@@ -190,6 +191,11 @@ func (this *LocalLogger) DelLogger(adapterName string) error {
 	return nil
 }
 
+// 设置日志起始路径
+func (this *LocalLogger) SetLogPathTrim(trimPath string) {
+	this.usePath = trimPath
+}
+
 func (this *LocalLogger) writeToLoggers(when time.Time, msg *loginfo, level int) {
 	for _, l := range this.outputs {
 		if l.name == AdapterConn {
@@ -220,9 +226,14 @@ func (this *LocalLogger) writeMsg(logLevel int, msg string, v ...interface{}) er
 	}
 	when := time.Now()
 	_, file, lineno, ok := runtime.Caller(this.callDepth)
+	var strim string = "src/"
+	if this.usePath != "" {
+		strim = this.usePath
+	}
 	if ok {
+
 		src = strings.Replace(
-			fmt.Sprintf("%s:%d", stringTrim(file, "src/"), lineno), "%2e", ".", -1)
+			fmt.Sprintf("%s:%d", stringTrim(file, strim), lineno), "%2e", ".", -1)
 	}
 
 	msgSt.Level = levelPrefix[logLevel]
@@ -313,6 +324,10 @@ func GetlocalLogger() *LocalLogger {
 // Reset will remove all the adapter
 func Reset() {
 	defaultLogger.Reset()
+}
+
+func SetLogPathTrim(trimPath string) {
+	defaultLogger.SetLogPathTrim(trimPath)
 }
 
 // param 可以是log配置文件名，也可以是log配置内容,默认DEBUG输出到控制台
